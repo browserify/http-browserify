@@ -33,10 +33,23 @@ var xhrHttp = (function () {
             'Microsoft.XMLHTTP'
         ];
         for (var i = 0; i < axs.length; i++) {
-            try {
-                return new(window.ActiveXObject)(axs[i]);
-            }
-            catch (e) {}
+            var res = (function (j) {
+                try {
+                    var ax = new(window.ActiveXObject)(axs[j]);
+                    return function () {
+                        if (ax) {
+                            var ax_ = ax;
+                            ax = null;
+                            return ax_;
+                        }
+                        else {
+                            return new(window.ActiveXObject)(axs[j]);
+                        }
+                    };
+                }
+                catch (e) {}
+            })(i);
+            if (res) return res;
         }
         throw new Error('ajax not supported in this browser')
     }

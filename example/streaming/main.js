@@ -2,7 +2,7 @@ var http = require('http');
 
 http.get({ path : '/doom' }, function (res) {
     var div = document.getElementById('result');
-    div.innerHTML = res.statusCode + ': ';
+    div.innerHTML += res.statusCode + ': ';
     if (!div.style) div.style = {};
     
     div.style.color = 'rgb(80,80,80)';
