@@ -1,10 +1,18 @@
-var http = require('./xhr');
+var http = require('http');
 
 http.get({ path : '/doom' }, function (res) {
+    var div = document.getElementById('result');
+    div.innerHTML = res.statusCode + ': ';
+    if (!div.style) div.style = {};
+    
+    div.style.color = 'rgb(80,80,80)';
+    
     res.on('data', function (buf) {
-        console.log('buf = ' + buf);
+        div.innerHTML += buf;
     });
+    
     res.on('end', function () {
-        console.log('end!');
+        div.style.color = 'black';
+        div.innerHTML += '!';
     });
 });

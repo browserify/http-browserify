@@ -13,12 +13,13 @@ app.get('/doom', function (req, res) {
             clearInterval(iv);
             res.end('m');
         }
-    }, 100);
+    }, 500);
 });
 
 var browserify = require('browserify');
 var bundle = browserify({
     entry : __dirname + '/main.js',
+    require : { http : 'http-browserify' },
     watch : true
 });
 app.use(bundle);

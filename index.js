@@ -1,6 +1,6 @@
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
-var Request = require('./request');
+var Request = require('./lib/request');
 
 http.request = function (params, cb) {
     if (!params) params = {};
