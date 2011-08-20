@@ -106,7 +106,8 @@ This module has been tested and works with:
 
 Multipart streaming responses are buffered in all versions of Internet Explorer
 and are somewhat buffered in Opera. In all the other browsers you get a nice
-unbuffered stream of `"data"` events.
+unbuffered stream of `"data"` events when you send down a content-type of
+`multipart/octet-stream` or similar.
 
 protip
 ======
