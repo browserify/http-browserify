@@ -116,7 +116,7 @@ You can do:
 
 ````javascript
 var bundle = browserify({
-    require : { http : 'http-require' }
+    require : { http : 'http-browserify' }
 });
 ````
 
