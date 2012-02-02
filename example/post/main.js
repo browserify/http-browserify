@@ -1,4 +1,4 @@
-var http = require('http');
+var http = require('http-browserify');
 
 var n = 100;
 var opts = { path : '/plusone', method : 'post' };

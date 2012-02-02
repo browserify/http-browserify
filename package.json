@@ -11,7 +11,7 @@
     },
     "devDependencies" : {
         "express" : "2.5.x",
-        "browserify" : "1.4.x"
+        "browserify" : "1.9.x"
     },
     "repository" : {
         "type" : "git",

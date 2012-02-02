@@ -1,4 +1,4 @@
-var http = require('http');
+var http = require('http-browserify');
 
 http.get({ path : '/doom' }, function (res) {
     var div = document.getElementById('result');

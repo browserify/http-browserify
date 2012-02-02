@@ -17,11 +17,7 @@ app.get('/doom', function (req, res) {
 });
 
 var browserify = require('browserify');
-var bundle = browserify({
-    entry : __dirname + '/main.js',
-    require : { http : 'http-browserify' },
-    watch : true
-});
+var bundle = browserify(__dirname + '/main.js');
 app.use(bundle);
 
 console.log('Listening on :8082');
