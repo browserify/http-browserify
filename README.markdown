@@ -5,6 +5,10 @@ The
 [http](http://nodejs.org/docs/v0.4.10/api/all.html#hTTP) module from node.js,
 but for browsers.
 
+When you `require('http')` in
+[browserify](http://github.com/substack/node-browserify),
+this module will be loaded.
+
 example
 =======
 
