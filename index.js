@@ -19,6 +19,9 @@ http.get = function (params, cb) {
     return req;
 };
 
+http.Agent = function () {};
+http.Agent.defaultMaxSockets = 4;
+
 var xhrHttp = (function () {
     if (typeof window === 'undefined') {
         throw new Error('no window object present');
