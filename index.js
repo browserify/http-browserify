@@ -7,7 +7,7 @@ http.request = function (params, cb) {
     if (!params.host) params.host = window.location.host.split(':')[0];
     if (!params.port) params.port = window.location.port;
     
-    var req = new Request(new xhrHttp, params);
+    var req = new Request(new xhrHttp(params), params);
     if (cb) req.on('response', cb);
     return req;
 };
@@ -22,9 +22,12 @@ http.get = function (params, cb) {
 http.Agent = function () {};
 http.Agent.defaultMaxSockets = 4;
 
-var xhrHttp = (function () {
+var xhrHttp = function (params) {
     if (typeof window === 'undefined') {
         throw new Error('no window object present');
+    }
+    else if (params.host != window.location.host.split(':')[0] && window.XDomainRequest) {
+        return window.XDomainRequest;
     }
     else if (window.XMLHttpRequest) {
         return window.XMLHttpRequest;
@@ -56,4 +59,4 @@ var xhrHttp = (function () {
     else {
         throw new Error('ajax not supported in this browser');
     }
-})();
+};
