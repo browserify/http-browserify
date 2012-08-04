@@ -9,6 +9,9 @@
         "example" : "example",
         "test" : "test"
     },
+    "dependencies": {
+        "concat-stream": "0.0.8"
+    },
     "devDependencies" : {
         "express" : "2.5.x",
         "browserify" : "1.9.x"
