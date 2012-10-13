@@ -1,4 +1,4 @@
-var http = require('http-browserify');
+var http = require('../../');
 
 http.get({ path : '/beep' }, function (res) {
     var div = document.getElementById('result');
