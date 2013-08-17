@@ -1,36 +1,39 @@
 {
-    "name" : "http-browserify",
-    "version" : "0.1.11",
-    "description" : "http module compatability for browserify",
-    "main" : "index.js",
-    "browserify" : "index.js",
-    "directories" : {
-        "lib" : ".",
-        "example" : "example",
-        "test" : "test"
-    },
-    "dependencies": {
-        "concat-stream": "0.0.8"
-    },
-    "devDependencies" : {
-        "ecstatic" : "~0.1.6"
-    },
-    "repository" : {
-        "type" : "git",
-        "url" : "http://github.com/substack/http-browserify.git"
-    },
-    "keywords" : [
-        "http",
-        "browserify",
-        "compatible",
-        "meatless",
-        "browser"
-    ],
-    "author" : {
-        "name" : "James Halliday",
-        "email" : "mail@substack.net",
-        "url" : "http://substack.net"
-    },
-    "license" : "MIT/X11",
-    "engine" : { "node" : ">=0.4" }
+  "name": "http-browserify",
+  "version": "0.1.11",
+  "description": "http module compatability for browserify",
+  "main": "index.js",
+  "browserify": "index.js",
+  "directories": {
+    "lib": ".",
+    "example": "example",
+    "test": "test"
+  },
+  "dependencies": {
+    "concat-stream": "~1.0.0",
+    "Base64": "~0.1.2"
+  },
+  "devDependencies": {
+    "ecstatic": "~0.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/substack/http-browserify.git"
+  },
+  "keywords": [
+    "http",
+    "browserify",
+    "compatible",
+    "meatless",
+    "browser"
+  ],
+  "author": {
+    "name": "James Halliday",
+    "email": "mail@substack.net",
+    "url": "http://substack.net"
+  },
+  "license": "MIT/X11",
+  "engine": {
+    "node": ">=0.4"
+  }
 }
