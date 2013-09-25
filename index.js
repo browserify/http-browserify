@@ -5,7 +5,7 @@ var Request = require('./lib/request');
 http.request = function (params, cb) {
     if (!params) params = {};
     if (!params.host) params.host = window.location.host.split(':')[0];
-    if (!params.port) params.port = window.location.port;
+    if (typeof params.port === 'undefined') params.port = window.location.port;
     if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
     
     var req = new Request(new xhrHttp, params);
