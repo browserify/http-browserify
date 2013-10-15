@@ -14,7 +14,8 @@
     "Base64": "~0.1.2"
   },
   "devDependencies": {
-    "ecstatic": "~0.1.6"
+    "ecstatic": "~0.1.6",
+    "tape": "~1.1.1"
   },
   "repository": {
     "type": "git",
@@ -35,5 +36,8 @@
   "license": "MIT/X11",
   "engine": {
     "node": ">=0.4"
+  },
+  "scripts": {
+    "test": "tape tests/*.js"
   }
 }
