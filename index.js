@@ -7,9 +7,9 @@ http.request = function (params, cb) {
     if (!params.host && !params.port) {
         params.port = parseInt(window.location.port, 10);
     }
+    if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
     if (!params.host) params.host = window.location.hostname;
     if (!params.port) params.port = params.scheme == 'https' ? 443 : 80;
-    if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
     
     var req = new Request(new xhrHttp, params);
     if (cb) req.on('response', cb);
