@@ -7,8 +7,20 @@ http.request = function (params, cb) {
     if (!params.host && !params.port) {
         params.port = parseInt(window.location.port, 10);
     }
+    if (!params.host && params.hostname) {
+        params.host = params.hostname;
+    }
+    
     if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
-    if (!params.host) params.host = window.location.hostname;
+    if (!params.host) {
+        params.host = window.location.hostname || window.location.host;
+    }
+    if (/:/.test(params.host)) {
+        if (!params.port) {
+            params.port = params.host.split(':')[1];
+        }
+        params.host = params.host.split(':')[0];
+    }
     if (!params.port) params.port = params.scheme == 'https' ? 443 : 80;
     
     var req = new Request(new xhrHttp, params);
