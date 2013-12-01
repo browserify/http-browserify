@@ -1,6 +1,6 @@
 {
   "name": "http-browserify",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "http module compatability for browserify",
   "main": "index.js",
   "browserify": "index.js",
