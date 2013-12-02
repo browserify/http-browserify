@@ -10,7 +10,8 @@
     "test": "test"
   },
   "dependencies": {
-    "Base64": "~0.1.2"
+    "Base64": "~0.1.2",
+    "inherits": "~2.0.1"
   },
   "devDependencies": {
     "ecstatic": "~0.1.6"
