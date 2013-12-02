@@ -10,7 +10,6 @@
     "test": "test"
   },
   "dependencies": {
-    "concat-stream": "~1.0.0",
     "Base64": "~0.1.2"
   },
   "devDependencies": {
