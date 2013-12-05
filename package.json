@@ -14,7 +14,8 @@
     "inherits": "~2.0.1"
   },
   "devDependencies": {
-    "ecstatic": "~0.1.6"
+    "ecstatic": "~0.1.6",
+    "tape": "~2.3.0"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,9 @@
     "name": "James Halliday",
     "email": "mail@substack.net",
     "url": "http://substack.net"
+  },
+  "scripts" : {
+    "test" : "tape test/*.js"
   },
   "license": "MIT/X11",
   "engine": {
