@@ -1,8 +1,12 @@
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
+var url = require('url')
 
 http.request = function (params, cb) {
+    if (typeof params === 'string') {
+        params = url.parse(params)
+    }
     if (!params) params = {};
     if (!params.host && !params.port) {
         params.port = parseInt(window.location.port, 10);
@@ -10,7 +14,7 @@ http.request = function (params, cb) {
     if (!params.host && params.hostname) {
         params.host = params.hostname;
     }
-    
+
     if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
     if (!params.host) {
         params.host = window.location.hostname || window.location.host;
@@ -22,7 +26,7 @@ http.request = function (params, cb) {
         params.host = params.host.split(':')[0];
     }
     if (!params.port) params.port = params.scheme == 'https' ? 443 : 80;
-    
+
     var req = new Request(new xhrHttp, params);
     if (cb) req.on('response', cb);
     return req;
