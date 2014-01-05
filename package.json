@@ -36,8 +36,5 @@
     "email": "mail@substack.net",
     "url": "http://substack.net"
   },
-  "license": "MIT/X11",
-  "engine": {
-    "node": ">=0.4"
-  }
+  "license": "MIT/X11"
 }
