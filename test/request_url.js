@@ -27,7 +27,7 @@ test('Test simple url string', function(t) {
 
 
 test('Test full url object', function(t) {
-  var url = { 
+  var url = {
     host: "localhost:8081",
     hostname: "localhost",
     href: "http://localhost:8081/api/foo?bar=baz",
@@ -47,3 +47,13 @@ test('Test full url object', function(t) {
   t.end();
 
 });
+
+
+test('Test string as parameters', function(t) {
+  var url = '/api/foo';
+  var request = http.get(url, noop);
+
+  t.equal( request.uri, 'http://localhost:8081/api/foo', 'Url should be correct');
+  t.end();
+
+})
