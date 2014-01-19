@@ -9,15 +9,15 @@ http.request = function (params, cb) {
     }
     if (!params) params = {};
     if (!params.host && !params.port) {
-        params.port = parseInt(window.location.port, 10);
+        params.port = parseInt(global.location.port, 10);
     }
     if (!params.host && params.hostname) {
         params.host = params.hostname;
     }
     
-    if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
+    if (!params.scheme) params.scheme = global.location.protocol.split(':')[0];
     if (!params.host) {
-        params.host = window.location.hostname || window.location.host;
+        params.host = global.location.hostname || global.location.host;
     }
     if (/:/.test(params.host)) {
         if (!params.port) {
@@ -43,13 +43,13 @@ http.Agent = function () {};
 http.Agent.defaultMaxSockets = 4;
 
 var xhrHttp = (function () {
-    if (typeof window === 'undefined') {
-        throw new Error('no window object present');
+    if (typeof global === 'undefined') {
+        throw new Error('no global object present');
     }
-    else if (window.XMLHttpRequest) {
-        return window.XMLHttpRequest;
+    else if (global.XMLHttpRequest) {
+        return global.XMLHttpRequest;
     }
-    else if (window.ActiveXObject) {
+    else if (global.ActiveXObject) {
         var axs = [
             'Msxml2.XMLHTTP.6.0',
             'Msxml2.XMLHTTP.3.0',
@@ -57,7 +57,7 @@ var xhrHttp = (function () {
         ];
         for (var i = 0; i < axs.length; i++) {
             try {
-                var ax = new(window.ActiveXObject)(axs[i]);
+                var ax = new(global.ActiveXObject)(axs[i]);
                 return function () {
                     if (ax) {
                         var ax_ = ax;
@@ -65,7 +65,7 @@ var xhrHttp = (function () {
                         return ax_;
                     }
                     else {
-                        return new(window.ActiveXObject)(axs[i]);
+                        return new(global.ActiveXObject)(axs[i]);
                     }
                 };
             }

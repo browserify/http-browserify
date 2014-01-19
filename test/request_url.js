@@ -1,13 +1,11 @@
-global.window = {
-  location: {
-    host: 'localhost:8081',
-    port: 8081,
-    protocol: 'http:'
-  }
+global.location = {
+  host: 'localhost:8081',
+  port: 8081,
+  protocol: 'http:'
 };
 
 var noop = function() {};
-global.window.XMLHttpRequest = function() {
+global.XMLHttpRequest = function() {
   this.open = noop;
   this.send = noop;
 };
