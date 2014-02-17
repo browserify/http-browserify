@@ -15,7 +15,10 @@ http.request = function (params, cb) {
         params.host = params.hostname;
     }
     
-    if(!params.protocol) params.protocol = window.location.protocol;
+    if (!params.protocol) {
+        params.protocol = params.scheme || window.location.protocol;
+        if (!/:$/.test(params.protocol)) params.protocol += ':';
+    }
 
     if (!params.host) {
         params.host = window.location.hostname || window.location.host;
