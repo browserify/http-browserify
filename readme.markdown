@@ -44,6 +44,7 @@ var req = http.request(options, cb)
 * headers={}, as an object mapping key names to string or Array values
 * host=window.location.host
 * port=window.location.port
+* withCredentials=true, as a bool to set if CORS should include cookies as part of the request
 
 The callback will be called with the response object.
 
