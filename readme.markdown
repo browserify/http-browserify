@@ -31,15 +31,15 @@ http.get({ path : '/beep' }, function (res) {
 
 var http = require('http');
 
-## var req = http.request(options, cb)
+## var req = http.request(opts, cb)
 
-`options` can have:
+where `opts` are:
 
-* method
-* path
-* headers={}, as an object mapping key names to string or Array values
-* host=window.location.host
-* port=window.location.port
+* `opts.method='GET'` - http method verb
+* `opts.path` - path string, example: `'/foo/bar?baz=555'`
+* `opts.headers={}` - as an object mapping key names to string or Array values
+* `opts.host=window.location.host` - http host
+* `opts.port=window.location.port` - http port
 
 The callback will be called with the response object.
 
