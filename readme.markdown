@@ -40,6 +40,7 @@ where `opts` are:
 * `opts.headers={}` - as an object mapping key names to string or Array values
 * `opts.host=window.location.host` - http host
 * `opts.port=window.location.port` - http port
+* `opts.responseType` - response type to set on the underlying xhr object
 
 The callback will be called with the response object.
 
