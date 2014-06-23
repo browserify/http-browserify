@@ -67,8 +67,5 @@ test('Test withCredentials param', function(t) {
   var request = http.request({ url: url, withCredentials: true }, noop);
   t.equal( request.xhr.withCredentials, true, 'xhr.withCredentials should be true');
 
-  var request = http.request({ url: url }, noop);
-  t.equal( request.xhr.withCredentials, true, 'xhr.withCredentials should be true');
-
   t.end();
 });
