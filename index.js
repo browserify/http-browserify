@@ -26,8 +26,10 @@ http.request = function (params, cb) {
         params.host = params.host.split(':')[0];
     }
     if (!params.port) params.port = params.scheme == 'https' ? 443 : 80;
-    
-    var req = new Request(new xhrHttp, params);
+
+    var xhrParams = params.xhrParams || {};
+
+    var req = new Request(new xhrHttp(xhrParams), params);
     if (cb) req.on('response', cb);
     return req;
 };
