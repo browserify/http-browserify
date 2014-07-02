@@ -26,8 +26,7 @@ http.request = function (params, cb) {
         params.host = params.host.split(':')[0];
     }
     if (!params.port) params.port = params.scheme == 'https' ? 443 : 80;
-    
-    var req = new Request(new xhrHttp(params), params);
+    var req = new Request(new (xhrHttp(params)), params);
     if (cb) req.on('response', cb);
     return req;
 };
@@ -79,7 +78,7 @@ var xhrHttp = function (params) {
     else {
         throw new Error('ajax not supported in this browser');
     }
-})();
+};
 
 http.STATUS_CODES = {
     100 : 'Continue',
