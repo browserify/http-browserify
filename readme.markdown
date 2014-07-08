@@ -2,7 +2,7 @@
 
 The
 [http](http://nodejs.org/docs/v0.4.10/api/all.html#hTTP) module from browserify,
-but for browsers that can only do cross-origin requests with XDomainRequest (IE8 & IE9).
+but supporting browsers that can only do cross-origin requests with XDomainRequest (IE8 & IE9).
 
 The out-of-the-box [http-browserify] does not work for cross-origin requests with XDomainRequest, and [an open issue](https://github.com/substack/http-browserify/pull/3) has gone unresponded to for almost 3 years.
 
