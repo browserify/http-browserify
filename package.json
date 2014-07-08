@@ -1,5 +1,5 @@
 {
-  "name": "http-browserify",
+  "name": "http-browserify-xdr",
   "version": "1.4.1",
   "description": "http module compatability for browserify",
   "main": "index.js",
