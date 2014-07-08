@@ -1,7 +1,7 @@
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
-var url = require('url')
+var url = require('url');
 
 http.request = function (params, cb) {
     if (typeof params === 'string') {
@@ -45,7 +45,8 @@ var xhrHttp = function (params) {
     if (typeof window === 'undefined') {
         throw new Error('no window object present');
     }
-    else if (params.host != window.location.host.split(':')[0] && window.XDomainRequest) {
+    else if (shouldXDR(params)) {
+        // NOTE: params.withCredentials will be ignored: http://bit.ly/ie9nocors
         return window.XDomainRequest;
     }
     else if (window.XMLHttpRequest) {
@@ -138,3 +139,12 @@ http.STATUS_CODES = {
     510 : 'Not Extended',               // RFC 2774
     511 : 'Network Authentication Required' // RFC 6585
 };
+
+// whether the request with params should use XDomainRequest
+function shouldXDR(params) {
+    var crossOrigin = params.host != window.location.host.split(':')[0];
+    var xhrExists = typeof XMLHttpRequest !== 'undefined';
+    var xdrExists = typeof XDomainRequest !== 'undefined';
+    var noCORS = xhrExists && ! ('withCredentials' in new XMLHttpRequest);
+    return crossOrigin && noCORS && xdrExists;
+}

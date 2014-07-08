@@ -1,19 +1,28 @@
-# http-browserify
+# http-browserify-xdr
 
 The
-[http](http://nodejs.org/docs/v0.4.10/api/all.html#hTTP) module from node.js,
-but for browsers.
+[http](http://nodejs.org/docs/v0.4.10/api/all.html#hTTP) module from browserify,
+but for browsers that can only do cross-origin requests with XDomainRequest (IE8 & IE9).
 
-When you `require('http')` in
-[browserify](http://github.com/substack/node-browserify),
-this module will be loaded.
+The out-of-the-box [http-browserify] does not work for cross-origin requests with XDomainRequest, and [an open issue](https://github.com/substack/http-browserify/pull/3) has gone unresponded to for almost 3 years.
+
+Use this in your browserify project by adding the following to your package.json:
+```json
+"browser": {
+    "http": "http-browserify-xdr"
+}
+```
+
+Note: XDomainRequests [cannot send cookies](http://bit.ly/ie9nocors), so 'withCredentials' options will be ignored. The way to do cross-origin requests withCredentials in these browsers is, well, you can't. You have to open an iframe serving a src on the origin you want to request, then postMessage into it, have it make the request, then postMessage the response out. See [sockjs-client](https://github.com/sockjs/sockjs-client#supported-transports-by-browser-html-served-from-http-or-https) for a referenc eimplementation of that.
+
+The following is the original http-browserify README because the API is the same.
 
 # example
 
 ``` js
 var http = require('http');
 
-http.get({ path : '/beep' }, function (res) {
+http.get({ host: 'anotherorigin.com', path : '/beep' }, function (res) {
     var div = document.getElementById('result');
     div.innerHTML += 'GET /beep<br>';
     
@@ -108,11 +117,11 @@ You can do:
 
 ````javascript
 var bundle = browserify({
-    require : { http : 'http-browserify' }
+    require : { http : 'http-browserify-xdr' }
 });
 ````
 
-in order to map "http-browserify" over `require('http')` in your browserified
+in order to map "http-browserify-xdr" over `require('http')` in your browserified
 source.
 
 # install
@@ -120,7 +129,7 @@ source.
 With [npm](https://npmjs.org) do:
 
 ```
-npm install http-browserify
+npm install http-browserify-xdr
 ```
 
 # license
