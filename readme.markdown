@@ -13,6 +13,8 @@ Use this in your browserify project by adding the following to your package.json
 }
 ```
 
+I intend to have version numbers here mirror http-browserify changes (>= 1.4.1) until @substack merges my pull request.
+
 Note: XDomainRequests [cannot send cookies](http://bit.ly/ie9nocors), so 'withCredentials' options will be ignored. The way to do cross-origin requests withCredentials in these browsers is, well, you can't. You have to open an iframe serving a src on the origin you want to request, then postMessage into it, have it make the request, then postMessage the response out. See [sockjs-client](https://github.com/sockjs/sockjs-client#supported-transports-by-browser-html-served-from-http-or-https) for a referenc eimplementation of that.
 
 The following is the original http-browserify README because the API is the same.
