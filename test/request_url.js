@@ -112,3 +112,17 @@ test('Test POST XHR2 types', function(t) {
   };
   request.end(new global.FormData());
 });
+
+test('Test response has reference to request object', function(t) {
+  t.plan(1);
+  var url = '/api/foo';
+
+  var request = http.request({ url: url });
+  request.on('response', function (res) {
+    t.equal(res.req, request, 'response should have reference to request object');
+  });
+  request.xhr.readyState = 4;
+  request.xhr.responseType = 'meat';
+  request.xhr.responseText = '';
+  request.xhr.onreadystatechange();
+});
