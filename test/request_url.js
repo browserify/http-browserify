@@ -112,3 +112,17 @@ test('Test POST XHR2 types', function(t) {
   };
   request.end(new global.FormData());
 });
+
+test('Test request has correct method and path properties', function(t) {
+  var path = '/api/foo?hello=world';
+
+  var request = http.request(path);
+  t.equal(request.path, path, 'path should be correct');
+  t.equal(request.method, 'GET', 'method should be correct');
+
+  request = http.request({ path: path, method: 'POST' });
+  t.equal(request.path, path, 'path should be correct');
+  t.equal(request.method, 'POST', 'method should be correct');
+
+  t.end();
+});
