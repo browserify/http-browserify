@@ -7,9 +7,15 @@ global.window = {
 };
 
 var noop = function() {};
-global.window.XMLHttpRequest = function() {
+global.window.XMLHttpRequest = function(xhrParams) {
   this.open = noop;
   this.send = noop;
+
+  if(!xhrParams) return;
+
+  Object.keys(xhrParams).forEach(function(key) {
+      this[key] = xhrParams[key];
+  }.bind(this));
 };
 
 var test = require('tape').test;
@@ -71,4 +77,18 @@ test('Test withCredentials param', function(t) {
   t.equal( request.xhr.withCredentials, true, 'xhr.withCredentials should be true');
 
   t.end();
+});
+
+test('Test additional xhr params', function(t) {
+    var request = http.request({
+        url: '/api/foo',
+        xhrParams: {
+            mozSystem: true,
+            mozAnon: true
+        }
+    });
+
+    t.equal( request.xhr.mozSystem, true, 'xhr.mozSystem should be true');
+    t.equal( request.xhr.mozAnon, true, 'mozAnon should be true');
+    t.end();
 });
