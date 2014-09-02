@@ -14,7 +14,11 @@ http.request = function (params, cb) {
     if (!params.host && params.hostname) {
         params.host = params.hostname;
     }
-    
+
+    if (params.protocol) {
+        params.scheme = params.protocol.split(':')[0];
+    }
+
     if (!params.scheme) params.scheme = window.location.protocol.split(':')[0];
     if (!params.host) {
         params.host = window.location.hostname || window.location.host;

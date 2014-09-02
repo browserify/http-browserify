@@ -48,6 +48,20 @@ test('Test full url object', function(t) {
 
 });
 
+test('Test alt protocol', function(t) {
+  var params = {
+    protocol: "foo:",
+    hostname: "localhost",
+    port: "3000",
+    path: "/bar"
+  };
+
+  var request = http.get(params, noop);
+
+  t.equal( request.uri, 'foo://localhost:3000/bar', 'Url should be correct');
+  t.end();
+
+});
 
 test('Test string as parameters', function(t) {
   var url = '/api/foo';
