@@ -86,3 +86,11 @@ test('Test withCredentials param', function(t) {
 
   t.end();
 });
+
+test('Test responseType param', function(t) {
+  var url = '/api/binary-endpoint';
+  var request = http.request({url: url, responseType: 'arraybuffer'}, noop);
+  t.equal(request.xhr.responseType, 'arraybuffer', 'xhr.responseType should be set');
+  t.end();
+});
+
