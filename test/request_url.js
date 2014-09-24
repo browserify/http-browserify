@@ -1,20 +1,19 @@
-global.window = {
-  location: {
+global.window = global;
+global.location = {
     host: 'localhost:8081',
     port: 8081,
     protocol: 'http:'
-  }
 };
 
 var noop = function() {};
-global.window.XMLHttpRequest = function() {
+global.XMLHttpRequest = function() {
   this.open = noop;
   this.send = noop;
 };
 
-global.window.FormData = function () {};
-global.window.Blob = function () {};
-global.window.ArrayBuffer = function () {};
+global.FormData = function () {};
+global.Blob = function () {};
+global.ArrayBuffer = function () {};
 
 var test = require('tape').test;
 var http = require('../index.js');
@@ -97,19 +96,19 @@ test('Test POST XHR2 types', function(t) {
 
   var request = http.request({ url: url, method: 'POST' }, noop);
   request.xhr.send = function (data) {
-    t.ok(data instanceof global.window.ArrayBuffer, 'data should be instanceof ArrayBuffer');
+    t.ok(data instanceof global.ArrayBuffer, 'data should be instanceof ArrayBuffer');
   };
-  request.end(new global.window.ArrayBuffer());
+  request.end(new global.ArrayBuffer());
 
   request = http.request({ url: url, method: 'POST' }, noop);
   request.xhr.send = function (data) {
-    t.ok(data instanceof global.window.Blob, 'data should be instanceof Blob');
+    t.ok(data instanceof global.Blob, 'data should be instanceof Blob');
   };
-  request.end(new global.window.Blob());
+  request.end(new global.Blob());
 
   request = http.request({ url: url, method: 'POST' }, noop);
   request.xhr.send = function (data) {
-    t.ok(data instanceof global.window.FormData, 'data should be instanceof FormData');
+    t.ok(data instanceof global.FormData, 'data should be instanceof FormData');
   };
-  request.end(new global.window.FormData());
+  request.end(new global.FormData());
 });
