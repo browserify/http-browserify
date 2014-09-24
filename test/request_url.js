@@ -12,6 +12,10 @@ global.window.XMLHttpRequest = function() {
   this.send = noop;
 };
 
+global.window.FormData = function () {};
+global.window.Blob = function () {};
+global.window.ArrayBuffer = function () {};
+
 var test = require('tape').test;
 var http = require('../index.js');
 
@@ -85,4 +89,27 @@ test('Test withCredentials param', function(t) {
   t.equal( request.xhr.withCredentials, true, 'xhr.withCredentials should be true');
 
   t.end();
+});
+
+test('Test POST XHR2 types', function(t) {
+  t.plan(3);
+  var url = '/api/foo';
+
+  var request = http.request({ url: url, method: 'POST' }, noop);
+  request.xhr.send = function (data) {
+    t.ok(data instanceof global.window.ArrayBuffer, 'data should be instanceof ArrayBuffer');
+  };
+  request.end(new global.window.ArrayBuffer());
+
+  request = http.request({ url: url, method: 'POST' }, noop);
+  request.xhr.send = function (data) {
+    t.ok(data instanceof global.window.Blob, 'data should be instanceof Blob');
+  };
+  request.end(new global.window.Blob());
+
+  request = http.request({ url: url, method: 'POST' }, noop);
+  request.xhr.send = function (data) {
+    t.ok(data instanceof global.window.FormData, 'data should be instanceof FormData');
+  };
+  request.end(new global.window.FormData());
 });
