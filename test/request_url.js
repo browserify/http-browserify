@@ -112,3 +112,17 @@ test('Test POST XHR2 types', function(t) {
   };
   request.end(new global.FormData());
 });
+  
+test('Test strings with "ArrayBuffer" in them', function(t) {
+  var Response = require('../lib/response');
+  var res = new Response;
+  var testString = 'I am a string with the word ArrayBuffer';
+  // Monkey patch response object.
+  res.emit = function(e, d) {
+    if (e === 'data') {
+      t.equal( d, testString, 'Emitted data should equal testString');
+      t.end();
+    }
+  };
+  res.handle({readyState: 4, responseText: testString});
+});
