@@ -1,7 +1,7 @@
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
-var url = require('url')
+var url = require('url');
 
 http.request = function (params, cb) {
     if (typeof params === 'string') {
@@ -33,8 +33,8 @@ http.request = function (params, cb) {
         params.host = params.host.split(':')[0];
     }
     if (!params.port) params.port = params.protocol == 'https:' ? 443 : 80;
-    
-    var req = new Request(new xhrHttp, params);
+
+    var req = new Request(new (getXMLHttpRequest()), params);
     if (cb) req.on('response', cb);
     return req;
 };
@@ -49,7 +49,7 @@ http.get = function (params, cb) {
 http.Agent = function () {};
 http.Agent.defaultMaxSockets = 4;
 
-var xhrHttp = (function () {
+var getXMLHttpRequest = function () {
     if (typeof window === 'undefined') {
         throw new Error('no window object present');
     }
@@ -78,12 +78,12 @@ var xhrHttp = (function () {
             }
             catch (e) {}
         }
-        throw new Error('ajax not supported in this browser')
+        throw new Error('ajax not supported in this browser');
     }
     else {
         throw new Error('ajax not supported in this browser');
     }
-})();
+};
 
 http.STATUS_CODES = {
     100 : 'Continue',
