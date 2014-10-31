@@ -81,9 +81,11 @@ Close and send the request body, optionally with additional `data` to append.
 
 # response methods
 
-## res.getHeader(key)
+## res.headers
 
-Return an http header, if set. `key` is case-insensitive.
+The response headers object.
+
+Read only map of header names and values. Header names are lower-cased.
 
 # response attributes
 
