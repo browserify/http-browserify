@@ -50,7 +50,10 @@ http.Agent = function () {};
 http.Agent.defaultMaxSockets = 4;
 
 var xhrHttp = (function () {
-    if (typeof window === 'undefined') {
+    if (typeof self !== 'undefined' && self.XMLHttpRequest) {
+        return self.XMLHttpRequest;
+    }
+    else if (typeof window === 'undefined') {
         throw new Error('no window object present');
     }
     else if (window.XMLHttpRequest) {
