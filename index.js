@@ -1,7 +1,8 @@
 var http = module.exports;
 var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
-var url = require('url')
+var Stream = require('stream');
+var url = require('url');
 
 http.request = function (params, cb) {
     if (typeof params === 'string') {
@@ -33,7 +34,7 @@ http.request = function (params, cb) {
         params.host = params.host.split(':')[0];
     }
     if (!params.port) params.port = params.protocol == 'https:' ? 443 : 80;
-    
+
     var req = new Request(new xhrHttp, params);
     if (cb) req.on('response', cb);
     return req;
@@ -143,3 +144,6 @@ http.STATUS_CODES = {
     510 : 'Not Extended',               // RFC 2774
     511 : 'Network Authentication Required' // RFC 6585
 };
+
+http.ClientRequest = Request;
+http.OutgoingMessage = Stream;
