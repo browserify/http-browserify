@@ -112,3 +112,55 @@ test('Test POST XHR2 types', function(t) {
   };
   request.end(new global.FormData());
 });
+
+test('Test setTimeout sets xhr timeout and ontimeout', function(t) {
+  var url = '/api/foo';
+  var request = http.request({ url: url, method: 'POST' }, noop);
+
+  request.setTimeout( 999, function(){});
+
+  t.equal( request.xhr.timeout, 999);
+  t.ok( request.xhr.ontimeout, 'Make sure ontimeout is a function');
+  t.end();
+});
+
+
+test('Test setTimeout will execute callback after timeout', function(t) {
+  var url = '/api/foo';
+  var request = http.request({ url: url, method: 'POST' }, noop);
+  var abortSend;
+
+  t.plan(1);
+
+  // send query handler function
+  var onSend = function (data) {
+    t.fail('setTimeout should have cancelled the request');
+  };
+
+  // timeout callback function
+  var onTimeout = function(){
+    clearTimeout( abortSend);
+    t.pass('timeout called');
+  };
+
+  // simulate a slow-executing query
+  request.xhr.send = function( data) {
+
+    // execute the query after a delay
+    abortSend = setTimeout(
+      onSend.bind( this, data), 1000
+    );
+
+    // simulate xhr ontimeout, normally this
+    // gets done somewhere in the browser
+    if (this.timeout && this.ontimeout) {
+      setTimeout( this.ontimeout, this.timeout);
+    }
+  }
+
+  // setup a timeout that will abort before query fires
+  request.setTimeout( 200, onTimeout);
+  request.end();
+});
+
+
