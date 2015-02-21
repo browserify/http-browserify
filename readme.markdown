@@ -110,9 +110,8 @@ unbuffered stream of `"data"` events when you send down a content-type of
 You can do:
 
 ````javascript
-var bundle = browserify({
-    require : { http : 'http-browserify' }
-});
+var bundle = browserify()
+    .require('http-browserify', { expose: 'http' });
 ````
 
 in order to map "http-browserify" over `require('http')` in your browserified
