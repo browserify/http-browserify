@@ -69,7 +69,7 @@ test('Test alt protocol', function(t) {
 test('Test host resolution with default port', function(t) {
   var url = {
     hostname: "external-host",
-	protocol: "https:"
+    protocol: "https:"
   };
 
   var request = http.get(url, noop);
