@@ -66,6 +66,19 @@ test('Test alt protocol', function(t) {
 
 });
 
+test('Test host resolution with default port', function(t) {
+  var url = {
+    hostname: "external-host",
+    protocol: "https:"
+  };
+
+  var request = http.get(url, noop);
+
+  t.equal( request.uri, 'https://external-host:443/', 'Url should be correct');
+  t.end();
+
+});
+
 test('Test string as parameters', function(t) {
   var url = '/api/foo';
   var request = http.get(url, noop);

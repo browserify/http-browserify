@@ -8,11 +8,11 @@ http.request = function (params, cb) {
         params = url.parse(params)
     }
     if (!params) params = {};
-    if (!params.host && !params.port) {
-        params.port = parseInt(window.location.port, 10);
-    }
     if (!params.host && params.hostname) {
         params.host = params.hostname;
+    }
+    if (!params.host && !params.port) {
+        params.port = parseInt(window.location.port, 10);
     }
 
     if (!params.protocol) {
