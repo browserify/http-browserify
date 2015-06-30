@@ -41,6 +41,7 @@ where `opts` are:
 * `opts.host=window.location.host` - http host
 * `opts.port=window.location.port` - http port
 * `opts.responseType` - response type to set on the underlying xhr object
+* `opts.withCredentials` - sets `withCredentials` on underlying xhr object. Defaults to true, *which is opposite the default on `XMLHttpRequest`*  
 
 The callback will be called with the response object.
 
