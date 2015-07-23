@@ -33,7 +33,14 @@ http.request = function (params, cb) {
         params.host = params.host.split(':')[0];
     }
     if (!params.port) params.port = params.protocol == 'https:' ? 443 : 80;
-    
+
+    if (!params.path) {
+        params.path = '/';
+    }
+    else if (params.path.indexOf('./') == 0) {
+        params.path = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/')) + params.path.slice(1);
+    }
+
     var req = new Request(new xhrHttp, params);
     if (cb) req.on('response', cb);
     return req;
