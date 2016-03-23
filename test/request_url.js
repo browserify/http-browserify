@@ -9,6 +9,7 @@ var noop = function() {};
 global.XMLHttpRequest = function() {
   this.open = noop;
   this.send = noop;
+  this.setRequestHeader = noop;
 };
 
 global.FormData = function () {};
@@ -111,4 +112,33 @@ test('Test POST XHR2 types', function(t) {
     t.ok(data instanceof global.FormData, 'data should be instanceof FormData');
   };
   request.end(new global.FormData());
+});
+
+test('Test header access is case insensitive, but is still sent in given case', function (t) {
+  t.plan(3);
+
+  var Request = require('../lib/request');
+  var headers = {};
+  var xhr = function () {
+    this.open = noop;
+    this.send = noop;
+    this.setRequestHeader = function (key, value) {
+      headers[key] = value;
+    };
+  };
+
+  var params = {
+    path: '/api/foo',
+    host: 'localhost',
+    scheme: 'http',
+    headers: { Foo: 'bar' }
+  };
+  var request = new Request(new xhr, params);
+  request.end();
+
+  t.ok(request.getHeader('foo') === params.headers.Foo, 'headers should be accessible regardless of case');
+  t.ok(headers['Foo'] === params.headers.Foo, 'the original header casing should be sent in the request');
+  
+  request.removeHeader('foo');
+  t.ok(request.getHeader('Foo') === undefined, 'headers should be removable regardless of case');
 });
