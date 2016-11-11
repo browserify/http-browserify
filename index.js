@@ -1,5 +1,4 @@
 var http = module.exports;
-var EventEmitter = require('events').EventEmitter;
 var Request = require('./lib/request');
 var url = require('url')
 
