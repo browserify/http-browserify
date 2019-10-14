@@ -17,7 +17,7 @@
     "inherits": "~2.0.1"
   },
   "devDependencies": {
-    "ecstatic": "~0.1.6",
+    "ecstatic": "~4.1.2",
     "tape": "~2.3.2"
   },
   "repository": {
