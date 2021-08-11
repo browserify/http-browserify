@@ -13,7 +13,7 @@
     "test": "tape test/*.js"
   },
   "dependencies": {
-    "Base64": "~0.2.0",
+    "Base64": "~1.0.0",
     "inherits": "~2.0.1"
   },
   "devDependencies": {
